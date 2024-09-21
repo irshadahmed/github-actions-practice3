@@ -25,6 +25,13 @@ jobs:
         run: npm ci
       - name: Build website
         run: npm run build
+      - name: Upload artifacts # to save the generated build
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-files # can by any name
+          path: | # We use multi-lines with a pipe
+            dist
+            package.json
   deploy:
     needs: build
     runs-on: ubuntu-latest
