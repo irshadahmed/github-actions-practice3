@@ -9,6 +9,11 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: deps-node-modules-${{ hashFiles('**/package-lock.jsob')}} # A unique has is generated for every package-lock.json file. This hash will be used to see if the node_modules cache needs to be invalidated
       - name: Install dependencies
         run: npm ci
       - name: Lint code
@@ -21,6 +26,11 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: deps-node-modules-${{ hashFiles('**/package-lock.jsob')}} # A unique has is generated for every package-lock.json file. This hash will be used to see if the node_modules cache needs to be invalidated
       - name: Install dependencies
         run: npm ci
       - name: Build website
